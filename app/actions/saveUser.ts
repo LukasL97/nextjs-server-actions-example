@@ -1,18 +1,12 @@
 'use server';
 
-import { User, users } from '@/app/user';
+import { User } from '@/app/user';
 import { randomUUID } from 'crypto';
-import { revalidatePath } from 'next/cache';
+import { putUser } from '@/app/db/db';
 
 export async function saveUser(user: User) {
-  console.log(`Before: ${users}`)
-  if (user.id) {
-    const index = users.findIndex(u => u.id === user.id);
-    users[index] = user;
-  } else {
+  if (!user.id) {
     user.id = randomUUID();
-    users.push(user);
   }
-  console.log(`After: ${users}`);
-  revalidatePath('/');
+  await putUser(user);
 }
