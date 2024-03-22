@@ -1,6 +1,6 @@
 'use server';
 
-import { deleteUser as deleteUserFromDb } from '@/app/db/db';
+import { deleteUserFromDb } from '@/app/db';
 import { revalidatePath } from 'next/cache';
 
 export async function deleteUser(id: string) {

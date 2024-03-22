@@ -7,7 +7,6 @@ import { useState } from 'react';
 import { User } from '@/app/user';
 
 export function UserForm({ user }: { user: User | undefined }) {
-
   const id = user?.id;
 
   const [firstName, setFirstName] = useState(user?.firstName ?? '');

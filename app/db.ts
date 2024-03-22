@@ -1,23 +1,23 @@
 import { kv } from '@vercel/kv';
 import { User } from '@/app/user';
 
-export async function putUser(user: User) {
+export async function putUserIntoDb(user: User) {
   await kv.set(user.id!, user);
 }
 
-export async function getUser(id: string): Promise<User | undefined> {
+export async function getUserFromDb(id: string): Promise<User | undefined> {
   return (await kv.get<User>(id)) || undefined;
 }
 
-export async function getAllUsers(): Promise<User[]> {
+export async function getAllUsersFromDb(): Promise<User[]> {
   const ids = await kv.keys('*');
   const users = await Promise.all(ids.map(async (id) => {
-    const user = await getUser(id);
+    const user = await getUserFromDb(id);
     return user ? [user] : [];
   }));
   return users.flat();
 }
 
-export async function deleteUser(id: string) {
+export async function deleteUserFromDb(id: string) {
   await kv.del(id);
 }

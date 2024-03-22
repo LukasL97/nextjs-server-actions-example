@@ -1,8 +1,8 @@
 import { UserSearch } from '@/app/components/UserSearch';
-import { getAllUsers } from '@/app/db/db';
+import { getAllUsersFromDb } from '@/app/db';
 
 export default async function SearchPage() {
-  const users = await getAllUsers();
+  const users = await getAllUsersFromDb();
 
   return <>
     <h1>User Search</h1>
