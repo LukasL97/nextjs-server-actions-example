@@ -3,9 +3,11 @@
 [Server Actions](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations)
 wurden in Next.js 14 als neue Methode zum Schreiben von Daten an den Server eingeführt.
 Sie können sowohl in Server-Komponenten, innerhalb von serverseitigen Forms, als auch in Client-Komponenten verwendet
-werden.
+werden. Server Actions erscheinen im Code als normale Funktionsaufrufe und werden von Next.js als POST-Requests an den
+Server interpretiert.
+
 Tatsächlich ist es mit Server Actions nicht nur möglich Daten zu schreiben, sondern auch sie vom Server zu lesen, sodass
-wir effektiv die gesamte Kommunikation zwischen Client und Server mittels Server Actions abbilden könnnen.
+wir effektiv die gesamte Kommunikation zwischen Client und Server mittels Server Actions abbilden können.
 Wie das funktioniert und was wir dabei beachten müssen, zeige ich in diesem Blogpost anhand eines einfachen Beispiels.
 
 ## Beispiel
@@ -20,7 +22,8 @@ hier: https://github.com/LukasL97/nextjs-server-actions-example
 ### Suche von Usern
 
 Die SearchPage ist als serverseitige Komponente implementiert und lädt initial alle User direkt aus der Datenbank. Da
-wir hier serverseitiges Rendering verwenden, müssen wir weder auf Server Actions noch auf API Routen zurückgreifen, um
+wir hier serverseitiges Rendering verwenden, müssen wir weder auf Server Actions noch auf Route Handlers zurückgreifen,
+um
 uns die User vom Server zu ziehen.
 
 ```tsx
@@ -199,19 +202,47 @@ export async function saveUser(user: User) {
 
 ## Diskussion
 
-Pro:
+Die Beispielanwendung hat uns gezeigt, wie wir Server Actions verwenden können, um Daten zu modifizieren und zu lesen.
+Im Vergleich zu Route Handlers haben Server Actions den Vorteil, dass sie Typsicherheit zur Compile-Zeit sicherstellen.
+Während es bei Route Handlers z.B. schnell passieren kann, dass unser Request Body auf Client-Seite nicht mit dem
+erwarteten
+Body auf Server-Seite übereinstimmt, wird das durch die statische Typisierung bei Server Actions zunächst verhindert.
 
-* Typsicherheit zur Compile-Zeit
-* einheitliches Modell für Schreib- und Lesezugriffe
+Wichtig zu erwähnen ist allerdings, dass Server Actions natürlich, genauso wie Route Handlers, unter der Haube
+HTTP-Endpunkte sind. Das heißt, dass ein Nutzer, der über das Frontend auf die Anwendung Zugriff hat, auch Zugriff auf den
+POST-Request hat, der an den Server gesendet wird und dadurch z.B. in der Lage ist, einen fehlerhaften Request Body an
+den Server zu schicken. Besonders bei öffentlich verfügbaren Anwendungen ist daher in der Praxis doch eine
+Eingabevalidierung auf Server-Seite notwendig, da auch TypeScripts statische Typisierung solche Situationen nicht
+abfangen kann.
+Genauso müssen natürlich Authentifizierung und Authorisierung in der Server Action geprüft werden.
 
-Contra:
+Wie eingangs erwähnt, wurden Server Actions in erster Linie als Methode zum Modifizieren von Daten eingeführt.
+Das zeigt sich auch daran, dass sie intern als POST-Requests umgesetzt sind.
+Auch unsere Action `getUsers` aus dem Beispiel wird daher als POST-Request umgesetzt, auch wenn sie tatsächlich Daten aus
+der Datenbank liest. Wenn wir hier stattdessen einen Route Handler verwenden würden, könnten wir diesen als
+GET-Endpunkt umsetzen. Praktisch hat die Limitierung auf POST-Requests den Nachteil, dass Requests nicht gecached
+werden.
+Das bedeutet, dass bei jeder Abfrage von `getUsers` mit dem gleichen Suchbegriff der Server tatsächlich aufgerufen wird,
+statt dass bei wiederholten Abfragen die bestehenden Daten aus dem Cache geladen werden.
 
-* Kein Caching?
-* POST-Requests statt GET-Requests
-* meistens einfacher Daten in Server-Komponente direkt zu laden (allerdings geht das nur beim initialen Rendern, danach
-  braucht man entweder fetch auf API Route oder Server Action)
-    * in dem Beispiel könnte man auch bei Eingabe eines Suchstrings die initiale Liste client-seitig filtern, aber das
-      skaliert nicht, wenn z.B. die Anzahl User sehr groß wird, und wir ein Limit bei der DB-Abfrage haben
+Für lesende Zugriffe ist es oft eine bessere Wahl, die Daten direkt in der Server-Komponente beim initialen Rendering zu
+laden.
+Dies hat natürlich die Einschränkung, dass wir auf diese Weise keine Daten anhand von Nutzerinteraktionen laden können 
+(außer die Interaktion löst einen Page Reload aus). 
+Um wie im obigen Beispiel Daten dynamisch anhand eines Inputs zu
+laden, ist dann doch wieder ein Route Handler oder eine Server Action notwendig.
+Alternativ kann es in manchen Fällen sinnvoll sein, die Daten beim initialen Rendering zu laden und client-seitig im
+State zu halten, sodass die Nutzerinteraktion dann keine erneutes Laden der Daten, sondern z.B. eine Filter-Operation
+auf dem State zur Folge hätte.
+Das Beispiel der User-Suche wäre so theoretisch umsetzbar, in der Praxis skaliert diese Variante allerdings häufig
+schlecht, da so ggf. große Datenmengen auf Client-Seite gehalten werden müssen.
+
+Trotz dieser Einschränkungen sind Server Actions eine interessante Alternative zu Route Handlers, vor allem für die
+Modifizierung von Daten.
+Es bleibt abzuwarten, ob zukünftige Versionen von Next.js weiter in diese Richtung gehen werden, um auch das Lesen von
+Daten mit Server Actions zugänglicher zu machen, indem z.B. GET-Requests und Caching ermöglicht werden.
+
+
 
 &ast; *In dem konkreten Beispiel wäre es zwar auch möglich `UserForm` als Server-Komponente zu implementieren, bei
 der `saveUser` als Submit Action verwendet wird. In der Praxis ist es allerdings häufig so, dass wir clientseitige
