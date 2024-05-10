@@ -120,7 +120,8 @@ export async function saveUser(user: User) {
 ```
 
 Das Beispiel mit `saveUser` zeigt uns, wie wir Server Actions verwenden können, um Daten an den Server zu schreiben.
-Im Vergleich zu [Route Handlers](https://nextjs.org/docs/app/building-your-application/routing/route-handlers) haben Server Actions den Vorteil, dass sie Typsicherheit zur Compile-Zeit sicherstellen.
+Im Vergleich zu [Route Handlers](https://nextjs.org/docs/app/building-your-application/routing/route-handlers) haben
+Server Actions den Vorteil, dass sie Typsicherheit zur Compile-Zeit sicherstellen.
 Während es bei Route Handlers z.B. schnell passieren kann, dass unser Request Body auf Client-Seite nicht mit dem
 erwarteten Body auf Server-Seite übereinstimmt, wird das durch die statische Typisierung bei Server Actions zunächst
 verhindert.
@@ -128,7 +129,8 @@ verhindert.
 Wichtig zu erwähnen ist allerdings, dass Server Actions natürlich, genauso wie Route Handlers, unter der Haube
 HTTP-Endpunkte sind. Das heißt, dass ein Nutzer, der über das Frontend auf die Anwendung Zugriff hat, auch Zugriff auf
 den
-POST-Request hat, der an den Server gesendet wird und dadurch z.B. in der Lage ist, einen fehlerhaften Request Body an
+POST-Request hat, der bei Aufruf der Server Action an den Server gesendet wird, und dadurch z.B. in der Lage ist, einen
+fehlerhaften Request Body an
 den Server zu schicken. Besonders bei öffentlich verfügbaren Anwendungen ist daher in der Praxis doch eine
 Eingabevalidierung auf Server-Seite notwendig, da auch TypeScripts statische Typisierung solche Situationen nicht
 abfangen kann.
@@ -162,7 +164,7 @@ export default async function SearchPage() {
 }
 ```
 
-Die SearchPage gibt die initial geladenen User an die `UserSearch`-Komponente weiter, die clientseitig gerendert wird.
+Die `SearchPage` gibt die initial geladenen User an die `UserSearch`-Komponente weiter, die clientseitig gerendert wird.
 Die `UserSearch` hält die Liste der User als State. Über ein Input-Feld kann nach Usern gesucht werden. Sobald sich
 der Input ändert, wird die Server Action `getUsers` aufgerufen, und das Ergebnis mittels `setUsers` in den State
 geschrieben.
