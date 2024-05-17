@@ -6,7 +6,7 @@ Sie können sowohl in Server-Komponenten, innerhalb von serverseitigen Forms, al
 werden. Server Actions erscheinen im Code als normale Funktionsaufrufe und werden von Next.js als POST-Requests an den
 Server interpretiert.
 
-In diesem Blogpost zeige ich anhand einfacher Beispiele, wir Server Actions verwendet werden können und was dabei zu
+In diesem Blogpost zeige ich anhand einfacher Beispiele, wie wir Server Actions verwenden können und was dabei zu
 beachten ist.
 
 ## Beispiel
@@ -235,7 +235,7 @@ Praktisch hat die Limitierung auf POST-Requests den Nachteil, dass Requests nich
 Das bedeutet, dass bei jeder Abfrage von `getUsers` mit dem gleichen Suchbegriff der Server tatsächlich aufgerufen wird,
 statt dass bei wiederholten Abfragen die bestehenden Daten aus dem Cache geladen werden.
 
-Glücklicherweise gibt es einen einfachen Weg, wir wir die Live-Suche auch ohne Server Action (und auch ohne Route
+Glücklicherweise gibt es einen einfachen Weg, wie wir die Live-Suche auch ohne Server Action (und auch ohne Route
 Handler) umsetzen können, nämlich mittels eines Suchparameters, den wir der `SearchPage` übergeben.
 Die `SearchPage` verwendet serverseitiges Rendering und lädt die User direkt aus der Datenbank.
 Dann filtert sie die Liste von Usern anhand des `searchTerm`, der über den Suchparameter `q` in der URL übergeben wird.

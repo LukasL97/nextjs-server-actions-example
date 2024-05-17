@@ -136,7 +136,7 @@ Hence, we still require an input validation in practice, especially for publicly
 static typing will not prevent such scenarios.
 Further, the Server Action needs to check for authentication and authorization as well.
 
-### Suche von Usern
+### User search
 
 We have seen that we can use Server Actions to write data to the server.
 This raises the question, if we can use Server Actions to read data from the server as well?
