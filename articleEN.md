@@ -2,9 +2,10 @@
 
 [Server Actions](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations)
 were introduced in Next.js 14 as a new method to write data to the server.
-They can be used in server components, within server-side forms, as well as in client-side components.
-Server Actions appear as normal function applications in the code and are interpreted as POST requests to the server by
-Next.js.
+They are asynchronous functions, which can be used in server components, within server-side forms, as well as in
+client-side components.
+While a Server Action appears as normal function applications in the code, it is interpreted as POST requests to the
+server by Next.js.
 
 In this blog post, I demonstrate by simple examples how Server Actions can be used and what we have to consider when
 using them.

@@ -2,9 +2,10 @@
 
 [Server Actions](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations)
 wurden in Next.js 14 als neue Methode zum Schreiben von Daten an den Server eingeführt.
-Sie können sowohl in Server-Komponenten, innerhalb von serverseitigen Forms, als auch in Client-Komponenten verwendet
-werden. Server Actions erscheinen im Code als normale Funktionsaufrufe und werden von Next.js als POST-Requests an den
-Server interpretiert.
+Es sind asynchrone Funktionen, die sowohl in Server-Komponenten, innerhalb von serverseitigen Forms, als auch in
+Client-Komponenten verwendet werden können.
+Während der Aufruf einer Server Action im Code als normaler Funktionsaufruf erscheint, wird er von Next.js als
+POST-Request an den Server interpretiert.
 
 In diesem Blogpost zeige ich anhand einfacher Beispiele, wie wir Server Actions verwenden können und was dabei zu
 beachten ist.
@@ -139,7 +140,7 @@ Genauso müssen natürlich Authentifizierung und Authorisierung in der Server Ac
 ### Suche von Usern
 
 Wir haben gesehen, dass wir Server Actions verwenden können, um Daten an den Server zu schreiben.
-Dadurch drängt sich natürlich die Frage auf, ob wir auch Server Actions verwenden können, um Daten vom Server zu lesen?
+Dadurch drängt sich natürlich die Frage auf, ob wir Server Actions auch verwenden können, um Daten vom Server zu lesen?
 Tatsächlich ist das technisch möglich, da Server Actions auch eine Response an den Client zurückgeben können.
 Ich möchte zunächst zeigen, wie wir eine Live-Suche mittels einer Server Action implementieren können und danach
 erklären, warum das tatsächlich keine so gute Idee ist und wie man es besser macht.
