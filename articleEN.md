@@ -4,8 +4,8 @@
 were introduced in Next.js 14 as a new method to send data to the server.
 They are asynchronous functions, which can be used in server components, within server-side forms, as well as in
 client-side components.
-While a Server Action appears as normal function applications in the code, it is interpreted as POST requests to the
-server by Next.js.
+While the invocation of a Server Action appears as normal function call in the code, it is interpreted as POST requests
+to the server by Next.js.
 
 In this blog post, I demonstrate by simple examples how Server Actions can be used and what we have to consider when
 using them.
@@ -96,8 +96,8 @@ export function UserForm({ user }: { user: User | undefined }) {
 
 The Server Action `saveUser` is a simple asynchronous function.
 It has to be noted, that we have to declare it with `'use server'`, in order to ensure that Next.js is able to identify
-it as Server Action.
-The Server Actions writes the given user into the database.
+it as a Server Action.
+The Server Action writes the given user into the database.
 If it does not yet have an ID (i.e., if it is a newly added user), a random ID is generated first.
 Finally, the cache is invalidated using `revalidatePath('/')`.
 Thereby, we make sure that the root page will be freshly rendered on the next load, containing the updated users.
@@ -126,7 +126,7 @@ Compared to [Route Handlers](https://nextjs.org/docs/app/building-your-applicati
 Actions have the advantage, that they provide type safety during compile time.
 When using route handlers, it can easily happen that, for instance, our request body on client side does not match the
 expected request body on server side.
-The static type checking on server actions prevents this error.
+The static type checking on Server Actions prevents this error.
 
 However, it is important to note that Server Actions, same as Route Handlers, are implemented as HTTP endpoints under
 the hood.
@@ -331,5 +331,5 @@ Further, when using Server Actions we must also take measures such as authorizat
 applications run securely and correctly.
 
 &ast; *In this concrete example, it would indeed be possible to implement `UserForm` as a server component, which
-uses `saveUser` as submit action. In practice however, we often would like to make use of client-side validation, which
+uses `saveUser` as a submit action. In practice however, we often would like to make use of client-side validation, which
 shows potential errors directly on a user input and therefore can only work with client-side rendering.*

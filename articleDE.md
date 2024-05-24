@@ -16,7 +16,7 @@ Als Beispiel dient eine einfache Webanwendung, mit der User angelegt und gesucht
 Die Suche soll live anhand eines Suchtexts erfolgen, d.h. unsere Anwendung muss clientseitig auf Änderungen an der
 Sucheingabe reagieren und die Daten vom Server laden.
 
-Im Folgenden gehe ich nur auf die wichtigen Code-Stellen ein. Den gesamte Code der Beispielanwendung findet ihr
+Im Folgenden gehe ich nur auf die wichtigen Code-Stellen ein. Den gesamten Code der Beispielanwendung findet ihr
 hier: https://github.com/LukasL97/nextjs-server-actions-example
 
 ### User anlegen und bearbeiten
