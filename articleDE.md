@@ -129,10 +129,10 @@ verhindert.
 
 Wichtig zu erwähnen ist allerdings, dass Server Actions natürlich, genauso wie Route Handlers, unter der Haube
 HTTP-Endpunkte sind. Das heißt, dass ein Nutzer, der über das Frontend auf die Anwendung Zugriff hat, auch Zugriff auf
-den
-POST-Request hat, der bei Aufruf der Server Action an den Server gesendet wird, und dadurch z.B. in der Lage ist, einen
-fehlerhaften Request Body an
-den Server zu schicken. Besonders bei öffentlich verfügbaren Anwendungen ist daher in der Praxis doch eine
+den POST-Request hat, der bei Aufruf der Server Action an den Server gesendet wird, sowie auf die Response, die er vom
+Server empfängt.
+Dadurch ist er z.B. in der Lage, einen fehlerhaften Request Body an den Server zu schicken.
+Besonders bei öffentlich verfügbaren Anwendungen ist daher in der Praxis doch eine
 Eingabevalidierung auf Server-Seite notwendig, da auch TypeScripts statische Typisierung solche Situationen nicht
 abfangen kann.
 Genauso müssen natürlich Authentifizierung und Authorisierung in der Server Action geprüft werden.
@@ -143,7 +143,7 @@ Wir haben gesehen, dass wir Server Actions verwenden können, um Daten an den Se
 Dadurch drängt sich natürlich die Frage auf, ob wir Server Actions auch verwenden können, um Daten vom Server zu lesen?
 Tatsächlich ist das technisch möglich, da Server Actions auch eine Response an den Client zurückgeben können.
 Ich möchte zunächst zeigen, wie wir eine Live-Suche mittels einer Server Action implementieren können und danach
-erklären, warum das tatsächlich keine so gute Idee ist und wie man es besser macht.
+erklären, warum das in der Praxis keine so gute Idee ist und wie man es besser macht.
 
 Die `SearchPage` ist als serverseitige Komponente implementiert und lädt initial alle User direkt aus der Datenbank. Da
 wir hier serverseitiges Rendering verwenden, müssen wir zunächst einmal weder auf Server Actions noch auf Route Handlers

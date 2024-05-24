@@ -131,7 +131,8 @@ The static type checking on server actions prevents this error.
 However, it is important to note that Server Actions, same as Route Handlers, are implemented as HTTP endpoints under
 the hood.
 This means, that if a user has access to the frontend of the application, they will also have access to the POST
-request, which is sent to the server when the Server Action is invoked.
+request, which is sent to the server when the Server Action is invoked, as well as the response that is received from
+the server.
 A user could use this information to send an invalid request body to the server.
 Hence, we still require an input validation in practice, especially for publicly available applications, as TypeScript's
 static typing will not prevent such scenarios.
