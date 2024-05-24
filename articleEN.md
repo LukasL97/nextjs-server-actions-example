@@ -1,7 +1,7 @@
 # Server Actions in Next.js 14
 
 [Server Actions](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations)
-were introduced in Next.js 14 as a new method to write data to the server.
+were introduced in Next.js 14 as a new method to send data to the server.
 They are asynchronous functions, which can be used in server components, within server-side forms, as well as in
 client-side components.
 While a Server Action appears as normal function applications in the code, it is interpreted as POST requests to the
@@ -121,7 +121,7 @@ export async function saveUser(user: User) {
 }
 ```
 
-The `saveUser` example shows us, how we can use Server Actions to write data to the server.
+The `saveUser` example shows us, how we can use Server Actions to send data to the server.
 Compared to [Route Handlers](https://nextjs.org/docs/app/building-your-application/routing/route-handlers), Server
 Actions have the advantage, that they provide type safety during compile time.
 When using route handlers, it can easily happen that, for instance, our request body on client side does not match the
@@ -139,7 +139,7 @@ Further, the Server Action needs to check for authentication and authorization a
 
 ### User search
 
-We have seen that we can use Server Actions to write data to the server.
+We have seen that we can use Server Actions to send data to the server.
 This raises the question, if we can use Server Actions to read data from the server as well?
 In fact, this is technically possible, as Server Actions are able to return a response to client.
 I would first like to demonstrate how we can implement a live search using a Server Action and then explain, why this is
