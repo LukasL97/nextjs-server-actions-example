@@ -314,6 +314,22 @@ von Next.js verwendet.
 Dieser verhindert, dass bei Eingabe des gleichen Suchbegriffs kurz hintereinander, der gleiche Fetch Request mehrfach
 aufgerufen wird und reduziert dadurch die Anzahl an Requests die tatsächlich an den Server gesendet werden.
 
+## Fazit
+
+Server Actions in Next.js 14 bieten eine interessante Option, Daten serverseitig zu verarbeiten und gleichzeitig
+statische Typesicherheit zu gewährleisten.
+Wir haben anhand des Beispiels gesehen, wie wir eine Webanwendung mit Datenbankanbindung in Next.js komplett ohne Route
+Handlers umsetzen können.
+Im Code erscheinen die Server Actions als normale Funktionsaufrufe, was zu einer guten Lesbarkeit des Codes beitragen
+kann.
+
+Wir haben aber auch gelernt, dass Server Actions nicht das Allheilmittel sind, mit dem wir die gesamte Kommunikation
+zwischen Client und Server abbilden sollten, auch wenn das technisch möglich ist.
+Zum Lesen von Daten ist serverseitiges Rendering die bessere Option, da wir dadurch Caching-Mechanismen optimal
+ausnutzen können.
+Außerdem müssen wir auch bei der Verwendung von Server Actions Maßnahmen wie Authorisierung und Validierung ergreifen,
+die eine sichere und korrekte Ausführung unserer Anwendungen gewährleisten.
+
 &ast; *In dem konkreten Beispiel wäre es zwar auch möglich `UserForm` als Server-Komponente zu implementieren, bei
 der `saveUser` als Submit Action verwendet wird. In der Praxis ist es allerdings häufig so, dass wir clientseitige
 Validierungen verwendet wollen, welche direkt bei Eingabe des Nutzers eventuelle Fehler anzeigen und daher nur mit

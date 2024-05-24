@@ -316,6 +316,20 @@ The Router Cache prevents that the same fetch request is executed multiple times
 several times in a row.
 Thereby, we are able to reduce the number of requests actually sent to the server.
 
+## Conclusion
+
+Server Actions in Next.js 14 offer an interesting option to process data on the server while ensuring static type
+safety.
+Based on an example, we have observed, how we can implement a web application with database access in Next.js completely
+without using Route Handlers.
+In the code, server actions appear as normal function invocations, which may improve readability of the code.
+
+However, we also learned that Server Actions are not a one-size-fits-all solution to implement the entire communication
+between client and server, even though we can technically use them in that way.
+For reading data, server-side rendering is a better option, as it allows us to make optimal use of caching mechanisms.
+Further, when using Server Actions we must also take measures such as authorization and validation to ensure that our
+applications run securely and correctly.
+
 &ast; *In this concrete example, it would indeed be possible to implement `UserForm` as a server component, which
 uses `saveUser` as submit action. In practice however, we often would like to make use of client-side validation, which
 shows potential errors directly on a user input and therefore can only work with client-side rendering.*
