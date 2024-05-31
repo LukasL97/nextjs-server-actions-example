@@ -1,6 +1,6 @@
 # Server Actions in Next.js 14
 
-Server Actions were introduced in Next.js 14 as a new method to send data to the server (see, for example, [this page](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations)).
+Server Actions were introduced in Next.js 14 as a new method to send data to the server (see the [documentation](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations)).
 They are asynchronous functions that can be used in server components, within server-side forms, as well as in
 client-side components.
 While the invocation of a Server Action appears as a normal function call in the code, it is interpreted as POST request

@@ -1,16 +1,16 @@
 # Server Actions in Next.js 14
 
-[Server Actions](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations)
-wurden in Next.js 14 als neue Methode zum Senden von Daten an den Server eingeführt.
+Server Actions wurden in Next.js 14 als neue Methode zum Senden von Daten an den Server eingeführt 
+(siehe die [Dokumentation](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations)).
 Es sind asynchrone Funktionen, die sowohl in Server-Komponenten, innerhalb von serverseitigen Forms, als auch in
 Client-Komponenten verwendet werden können.
-Während der Aufruf einer Server Action im Code als normaler Funktionsaufruf erscheint, wird er von Next.js als
+Während der Aufruf einer Server Action im Code als ein normaler Funktionsaufruf erscheint, wird er von Next.js als
 POST-Request an den Server interpretiert.
 
 In diesem Blogpost zeige ich anhand einfacher Beispiele, wie wir Server Actions verwenden können und was dabei zu
 beachten ist.
 
-## Beispiel
+## Server Actions: ein Beispiel
 
 Als Beispiel dient eine einfache Webanwendung, mit der User angelegt und gesucht werden können.
 Die Suche soll live anhand eines Suchtexts erfolgen, d.h. unsere Anwendung muss clientseitig auf Änderungen an der
@@ -123,8 +123,8 @@ export async function saveUser(user: User) {
 Das Beispiel mit `saveUser` zeigt uns, wie wir Server Actions verwenden können, um Daten an den Server zu senden.
 Im Vergleich zu [Route Handlers](https://nextjs.org/docs/app/building-your-application/routing/route-handlers) haben
 Server Actions den Vorteil, dass sie Typsicherheit zur Compile-Zeit sicherstellen.
-Während es bei Route Handlers z.B. schnell passieren kann, dass unser Request Body auf Client-Seite nicht mit dem
-erwarteten Body auf Server-Seite übereinstimmt, wird das durch die statische Typisierung bei Server Actions zunächst
+Während es bei Route Handlers z.B. schnell passieren kann, dass unser Request Body auf der Client-Seite nicht mit dem
+erwarteten Body auf der Server-Seite übereinstimmt, wird das durch die statische Typisierung bei Server Actions zunächst
 verhindert.
 
 Wichtig zu erwähnen ist allerdings, dass Server Actions natürlich, genauso wie Route Handlers, unter der Haube
@@ -140,7 +140,7 @@ Genauso müssen natürlich Authentifizierung und Authorisierung in der Server Ac
 ### Suche von Usern
 
 Wir haben gesehen, dass wir Server Actions verwenden können, um Daten an den Server zu senden.
-Dadurch drängt sich natürlich die Frage auf, ob wir Server Actions auch verwenden können, um Daten vom Server zu lesen?
+Dadurch drängt sich natürlich die Frage auf, ob wir Server Actions auch verwenden können, um Daten vom Server zu lesen.
 Tatsächlich ist das technisch möglich, da Server Actions auch eine Response an den Client zurückgeben können.
 Ich möchte zunächst zeigen, wie wir eine Live-Suche mittels einer Server Action implementieren können und danach
 erklären, warum das in der Praxis keine so gute Idee ist und wie man es besser macht.
@@ -311,8 +311,8 @@ was eine angenehmere User Experience bedeutet.
 Außerdem wird der
 clientseitige [Router Cache](https://nextjs.org/docs/app/building-your-application/caching#router-cache)
 von Next.js verwendet.
-Dieser verhindert, dass bei Eingabe des gleichen Suchbegriffs kurz hintereinander, der gleiche Fetch Request mehrfach
-aufgerufen wird und reduziert dadurch die Anzahl an Requests die tatsächlich an den Server gesendet werden.
+Dieser verhindert, dass bei Eingabe des gleichen Suchbegriffs kurz hintereinander der gleiche Fetch Request mehrfach
+aufgerufen wird, und reduziert dadurch die Anzahl an Requests, die tatsächlich an den Server gesendet werden.
 
 ## Fazit
 
