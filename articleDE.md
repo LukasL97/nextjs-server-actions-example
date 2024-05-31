@@ -330,6 +330,8 @@ ausnutzen können.
 Außerdem müssen wir auch bei der Verwendung von Server Actions Maßnahmen wie Authorisierung und Validierung ergreifen,
 die eine sichere und korrekte Ausführung unserer Anwendungen gewährleisten.
 
+---
+
 &ast; *In dem konkreten Beispiel wäre es zwar auch möglich `UserForm` als Server-Komponente zu implementieren, bei
 der `saveUser` als Submit Action verwendet wird. In der Praxis ist es allerdings häufig so, dass wir clientseitige
 Validierungen verwendet wollen, welche direkt bei Eingabe des Nutzers eventuelle Fehler anzeigen und daher nur mit

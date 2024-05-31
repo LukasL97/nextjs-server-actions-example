@@ -328,6 +328,8 @@ For reading data, server-side rendering is a better option, as it allows us to m
 Furthermore, when using Server Actions, we must also take measures such as authorization and validation to ensure that our
 applications run securely and correctly.
 
+---
+
 &ast; *In this concrete example, it would indeed be possible to implement `UserForm` as a server component, which
 uses `saveUser` as a submit action. In practice however, we often would like to make use of client-side validation, which
 shows potential errors directly on a user input and therefore can only work with client-side rendering.*
